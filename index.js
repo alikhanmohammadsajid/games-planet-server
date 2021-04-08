@@ -3,6 +3,7 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 require('dotenv').config();
 
 const port = process.env.PORT || 5055
@@ -36,10 +37,19 @@ client.connect(err => {
     gamesCollection.insertOne(newGame)
     .then(result => {
       console.log('inserted', result.insertedCount);
-      res.send(result.insertedCount > 0)
+      res.send('success', result.insertedCount > 0)
     })
   })
 
+  // app.post('/manageGames', (req, res) => {
+  //   const newGame = req.body
+  //   console.log('adding new game: ', newGame);
+  //   gamesCollection.insertOne(newGame)
+  //   .then(result => {
+  //     console.log('inserted', result.insertedCount);
+  //     res.send('success', result.insertedCount > 0)
+  //   })
+  // })
   // client.close();
 });
 
